@@ -1,6 +1,6 @@
 # Bioindustrial Processes
 
-In this repo I put some stuffs related to the course "Bio Processes", 2021 spring semester. For updates, browse [the commits](https://github.com/pelafusta/bioindustrial_processes/commits/master).
+In this repo I put some stuffs related to the course "Bio Processes", 2021 spring semester. For updates, browse [the commits](https://github.com/pelafustan/bioindustrial_processes/commits/master).
 
 ## Author
 
