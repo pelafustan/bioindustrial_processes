@@ -395,7 +395,7 @@ Se aplicó entonces este razonamiento a las tres columnas de datos de la tabla \
 
 donde las ecuaciones \eqref{eq:glicerol}, \eqref{eq:sucrosa} y \eqref{eq:glucosa} representan la linealización del crecimiento bacteriano en glicerol, sucrosa y glucosa, respectivamente.
 
-Los puntos de la tabla \ref{tab:growth_log}, junto con los modelos, están representados en la figura
+Los puntos de la tabla \ref{tab:growth_log}, junto con los modelos, están representados en la figura \ref{fig:growth_models}
 
 \begin{figure}[H]
   \centering
@@ -452,7 +452,6 @@ Los puntos de la tabla \ref{tab:growth_log}, junto con los modelos, están repre
       };
       \addlegendentry{Glucosa};
 
-        % \addplot[no marks, color=blue] {0.02576*x + 17.558637};
       \addplot[no marks, color=cyan]
         coordinates { 
           (0, 17.001903)
@@ -473,4 +472,21 @@ Los puntos de la tabla \ref{tab:growth_log}, junto con los modelos, están repre
     \end{axis}
   \end{tikzpicture}
   \caption{Curva de crecimiento (linealizada)}
+  \label{fig:growth_models}
 \end{figure}
+
+A partir del desarrollo anterior es que se logró determinar los siguientes parámetros para \emph{E. coli} BL21(DE3)
+
+\[
+  g^{-1}_{\text{ Glicerol}} = \SI[per-mode=fraction]{0.0372}{\gen\per\minute} \qquad g^{-1}_{\text{ Sucrosa}} = \SI[per-mode=fraction]{0.0290}{\gen\per\minute} \qquad g^{-1}_{\text{ Glucosa}} = \SI[per-mode=fraction]{0.0372}{\gen\per\minute}
+\]
+
+lo que indica la velocidad de crecimiento del microorganismo.
+
+Lo anterior también se puede expresar como 
+
+\[
+  g_{\text{ Glicerol}} = \SI[per-mode=fraction]{26.8856}{\minute\per\gen} \qquad g_{\text{ Sucrosa}} = \SI[per-mode=fraction]{34.4585}{\minute\per\gen} \qquad g_{\text{ Glucosa}} = \SI[per-mode=fraction]{26.9042}{\minute\per\gen}
+\]
+
+lo que indica el tiempo que le toma a una célula duplicarse.
