@@ -10,12 +10,23 @@
 \usepackage{array}
 \usepackage{csquotes}
 \usepackage{multicol}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true, 
+  pdftitle={Reporte Variables ambientales sobre el crecimiento microbiano}, 
+  pdfauthor={Nicolás Garrido and Patricio Parada},
+}
 \usepackage{xpatch}
 \usepackage{siunitx}
+\usepackage[font=small]{caption}
+\usepackage{multirow}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=newest}
 \usepackage[backend=biber,style=apa,citestyle=authoryear]{biblatex}
 \addbibresource{reference.bib}
 
-\DeclareSIUnit[quatity-product = {}]\UFC{UFC}
+\DeclareSIUnit[quatity-product = {}]\ufc{UFC}
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt}
