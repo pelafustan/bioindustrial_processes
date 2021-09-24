@@ -17,7 +17,7 @@ Los datos obtenidos de densidad óptica desde una muestra con número de célula
 \end{table}
 
 
-Se ajustaron los datos para obtener la densidad óptica de la muestra, ya que la presentada en la tabla \ref{tab:cal_brut} indica la densidad óptica tanto del organismo como del medio de cultivo, lo que son presentado en la tabla \ref{tab:cal_adj}
+Se ajustaron los datos para obtener la densidad óptica de la muestra, ya que la presentada en la tabla \ref{tab:cal_brut} indica la densidad óptica tanto del organismo como del medio de cultivo, lo que son presentados en la tabla \ref{tab:cal_adj}
 
 \begin{table}[H]
   \centering
@@ -112,7 +112,7 @@ Se manipuló el modelo presentado en la ecuación \eqref{eq:first_model} de form
 
 Las mediciones de densidad óptica obtenidas para muestra problema se detallan en la tabla \ref{tab:growth_brut}. 
 
-Los datos presentado en la tabla \ref{tab:growth_brut} se corrigieron, en su promedio, los cuales se presentan en la tabla \ref{tab:growth_fixed}.
+Los datos presentados en la tabla \ref{tab:growth_brut} se corrigieron, en su promedio, los cuales se presentan en la tabla \ref{tab:growth_fixed}.
 
 \begin{table}[H]
   \centering
@@ -160,7 +160,7 @@ Los datos presentado en la tabla \ref{tab:growth_brut} se corrigieron, en su pro
 
 Estos datos fueron graficados y dicho gráfico se muestra en la figura \ref{fig:growth_curve}.
 
-Usando el modelo descrito en la ecuación \eqref{eq:actual_model} se interpolaron los datos presentado en la tabla \ref{tab:growth_fixed}; estos datos se tabularon y se encuentran disponbles en la tabla \ref{tab:growth_ufc}
+Usando el modelo descrito en la ecuación \eqref{eq:actual_model} se interpolaron los datos presentados en la tabla \ref{tab:growth_fixed}; estos datos se tabularon y se encuentran disponibles en la tabla \ref{tab:growth_ufc}
 
 \begin{figure}[H]
   \centering
@@ -328,7 +328,7 @@ Al reemplazar \eqref{eq:gen_time} en \eqref{eq:growth_line}, se obtiene la sigui
   \ln(N) = \frac{\ln(2)}{g} t + \ln(N_0)
 \end{equation}
 
-A consecuencia de lo expresado anteriormente, es que se calculó el logaritmo natural de los valores presentes en la tabla \ref{tab:growth_ufc}, lo que se almacenó en la tabla \ref{tab:growth_log}.
+A consecuencia del desarrollo matemático anterior, es que se procedió a calcular el logaritmo natural de los valores presentes en la tabla \ref{tab:growth_ufc}, lo que se almacenó en la tabla \ref{tab:growth_log}.
 
 \begin{table}[H]
   \centering
@@ -344,3 +344,133 @@ A consecuencia de lo expresado anteriormente, es que se calculó el logaritmo na
   \label{tab:growth_log}
 \end{table}
 
+Las justificaciones y demostraciones de teoremas asociados a las próximas expresiones matemáticas escapan a los objetivos del presente reporte, pero son resultados bien conocidos dentro de los métodos numéricos, particularmente para el cómputo por mínimos cuadrados \parencite{chapra2015}.
+
+Al tenerse $n$ observaciones de la forma 
+
+\[
+  \underbrace{
+  \left(
+    \begin{array}{c}
+      \ln(N_1) \\
+      \vdots \\
+      \ln(N_n)
+    \end{array}
+  \right)
+  }_{\displaystyle Y}
+  = 
+  \underbrace{
+  \left(
+    \begin{array}{cc}
+      t_1\cdot\ln(2) & 1 \\
+      \vdots & \vdots \\
+      t_n\cdot\ln(2) & 1
+    \end{array}
+  \right)}_{\displaystyle A}
+  \underbrace{
+    \begin{array}{c}
+    \\[-4pt]
+    \left(
+      \begin{array}{c}
+        g^{-1} \\
+        \ln(N_0)
+      \end{array}
+    \right) \\[18pt]
+  \end{array}}_{\displaystyle X}
+\]
+
+no es posible despejar, directamente, el vector de interés $X$. Para solventar el inconveniente de que la matriz $A$ no es cuadrada, se procede a multiplicar por la izquierda por su transpuesta, de forma que la matriz resultante, $A^{\text{t}}A$, es una matriz cuadrada. Entonces, el vector de interés se obtiene mediante
+
+\begin{equation}
+  X = (A^{\text{t}}A)^{-1}(A^{\text{t}}Y)
+\end{equation}
+
+Se aplicó entonces este razonamiento a las tres columnas de datos de la tabla \ref{tab:growth_log}, lo que determina los siguientes modelos: 
+
+\begin{eqnarray}
+  \ln(N) = 0.02578 t + 17.001903, \quad R^2=0.961773 \label{eq:glicerol} \\
+  \ln(N) = 0.02902 t + 17.564960, \quad R^2=0.841405 \label{eq:sucrosa} \\
+  \ln(N) = 0.02576 t + 17.558637, \quad R^2=0.933942 \label{eq:glucosa}
+\end{eqnarray}
+
+donde las ecuaciones \eqref{eq:glicerol}, \eqref{eq:sucrosa} y \eqref{eq:glucosa} representan la linealización del crecimiento bacteriano en glicerol, sucrosa y glucosa, respectivamente.
+
+Los puntos de la tabla \ref{tab:growth_log}, junto con los modelos, están representados en la figura
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[baseline=(current bounding box.center)]
+    \begin{axis}[
+        title={Curva de crecimiento}, 
+        xlabel={Tiempo (minutos)},
+        ylabel={$\ln N$},
+        xmin=-10, xmax=130,
+        xtick={0, 30, 60, 90, 120},
+        xticklabel style={ 
+          /pgf/number format/precision=3, 
+          /pgf/number format/fixed}, 
+        legend pos = north west, 
+        yticklabel style={ 
+          /pgf/number format/precision=3, 
+          /pgf/number format/fixed}, 
+        legend pos = north west, 
+        ymajorgrids=true, 
+        xmajorgrids=true, 
+        yminorgrids=true, 
+        xminorgrids=true, 
+        grid style=dashed]
+
+      \addplot[only marks, color=cyan]
+        coordinates {
+          (0, 16.6960)
+          (30, 18.0551)
+          (60, 18.7119)
+          (90, 19.3766)
+          (120, 19.9034)
+      };
+      \addlegendentry{Glicerol};
+
+
+      \addplot[only marks, color=magenta]
+        coordinates {
+          (0, 17.0569)
+          (30, 18.5674)
+          (60, 19.1554)
+          (90, 19.4435)
+          (120, 19.6362)
+      };
+      \addlegendentry{Sucrosa};
+
+
+      \addplot[only marks, color=blue]
+        coordinates {
+          (0, 17.1531)
+          (30, 18.7311)
+          (60, 19.2721)
+          (90, 19.9657)
+          (120, 20.4003)
+      };
+      \addlegendentry{Glucosa};
+
+        % \addplot[no marks, color=blue] {0.02576*x + 17.558637};
+      \addplot[no marks, color=cyan]
+        coordinates { 
+          (0, 17.001903)
+          (120, 20.0955)
+      };
+
+      \addplot[no marks, color=magenta]
+        coordinates { 
+          (0, 17.564960)
+          (120, 20.0474)
+      };
+
+      \addplot[no marks, color=blue]
+        coordinates { 
+          (0, 17.558637)
+          (120, 20.6498)
+      };
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Curva de crecimiento (linealizada)}
+\end{figure}
