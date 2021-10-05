@@ -2,6 +2,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage[spanish,es-tabla,es-lcroman]{babel}
 \usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage[left=1in,right=1in,top=0.5in,bottom=1in,includehead,includefoot]{geometry}
 \graphicspath{{./images/}}
@@ -10,6 +13,7 @@
 \usepackage{array}
 \usepackage{csquotes}
 \usepackage{multicol}
+\usepackage{physics}
 \usepackage{hyperref}
 \hypersetup{
   colorlinks=true, 
@@ -29,15 +33,14 @@
 \usepackage{indentfirst}
 \usepackage{setspace}
 
-
 \pgfplotsset{compat=newest}
 \usepackage[backend=biber,style=apa,citestyle=authoryear]{biblatex}
 \addbibresource{reference.bib}
 
-\DeclareSIUnit[quatity-product = {}]\ufc{UFC}
-
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt}
+
+\decimalpoint
 
 \begin{document}
   \begin{titlepage}
@@ -60,10 +63,11 @@
 
     \vspace{2cm}
 
-    {\large \scshape Reporte 1 \par}
+    {\large \scshape Reporte 2 \par}
+
     \vspace{1cm}
-    {\Large \bfseries Determinación de la Velocidad especifica de consumo de Oxigeno Disuelto de la
-levadura Pichia pastoris en un cultivo en lote en tanque agitado\par}
+    {\Large \bfseries Determinación de la velocidad específica de consumo de oxígeno disuelto de la levadura \emph{Pichia pastoris} en un cultivo en lote en tanque agitado \par}
+
     \vspace{2cm}
     {\itshape Nicolás Garrido Calderara \par}
     {\itshape J. Patricio Parada Gutiérrez \par}

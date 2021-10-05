@@ -1,1 +1,86 @@
+Los datos obtenidos del biorreactor fueron tabulados en un archivo csv que contiene 357 filas (observaciones), a intervalos de 10 segundos, lo que indica que el tiempo en que se estuvo incubando el organismo fue de 3560 segundos (59 minutos, 20 segundos). 
+
+La expresión 
+
+\begin{equation}
+  \dv{C_L}{t} = K_La(C^* - C_L) - QO_2X
+  \label{eq:first}
+\end{equation}
+
+en donde:
+
+\begin{itemize}
+  \item $K_la$: coeficiente volumétrico de transferencia (\si{\per\hour}). 
+  \item $C^*$: solubilidad del O$_2$ en el medio (\si{\g\per\L}).
+  \item $C_L$: concentración de O$_2$ disuelto (\si{\g\per\L}).
+  \item $QO_2$: velocidad específica de consumo de O$_2$ (mmol$\,$O$_2$ g$^{-1}$ h$^{-1}$).
+  \item $X$: concentración de biomasa (\si{\g\per\L}).
+\end{itemize}
+
+La ecuación \eqref{eq:first} considera la interacción del medio de cultivo y el microorganismo en cuestión para el cambio de la concentración de O$_2$ disuelto. Se puede puede eliminar los efectos de la interacción del medio con el oxígeno al saturar dicho medio hasta que la medición de la saturación sea constante. En dicho momento, la expresión dada en \eqref{eq:first} cambia a
+
+\begin{equation}
+  \dv{C_L}{t} = -QO_2X \Leftrightarrow \frac{1}{C^*}\dv{C_L}{t} = -R
+  \label{eq:second}
+\end{equation}
+
+donde $R = \frac{QO_2X}{C^*}$ y representa al cambio en la concentración del oxígeno producto de la acción de la biomasa. Esta ecuación diferencial se puede resolver al tener en consideración que $C_L(0) = C_b$, lo que genera la expresión
+
+\begin{equation}
+  \frac{1}{C*}C_L(t) = \frac{C_b}{C*} - R
+  \label{eq:third}
+\end{equation}
+
+En consideración de lo anterior es que experimentalmente se saturó el medio de cultivo: desde $t_0=\SI{0}{\s}$ hasta $t_i=\SI{1270}{\s}$ se saturó la mezcla. Desde $t_i$ hasta $t_f=\SI{2620}{\s}$ es que se observa un descenso constante en la concentración de oxígeno disuelto, lo cual se analizó al observar la diferencia entre pares consecutivos de observaciones medidas, i.e., se midió la diferencia DO$_{i}-$DO$_{i-1}$, para $i=2,...,357$.
+
+Los valores experimentales representan la saturación de oxígeno a nivel porcentual. Para obtener la concentración (en \si{\g\per\L}), se usa la siguiente relación
+
+\[ 
+  \left[\text{O}_2\right] = \text{Lectura (\%)} \cdot \frac{8.05\times10^{-3}}{111\%}
+\]
+
+Al aplicar esta transformación a los datos en el intervalo de interés, se obtienen valores de $C_L$ a partir de valores de DO. Estos datos se grafican como sigue
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        xlabel={Tiempo (s)},
+        ylabel={Concentración O$_2$ (\si{\g\per\L})},
+        xtick={1300, 1950, 2600}]
+      \addplot table [no marks, x=time, y=O2, col sep=comma] {bro2.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Cambio de la concentración de O$_2$ en el tiempo}
+  \label{fig:concentracion}
+\end{figure}
+
+De lo observado en \ref{fig:concentracion}, se puede buscar la recta de mejor ajuste para los datos, i.e.,
+
+\[ 
+  C_L(t) = m\cdot t + b
+\]
+
+en donde $m = -4.49188\times 10^{6}$ y $b=0.01257$. El valor de $m$ corresponde a $\dv{C_L}{t}$.
+
+dado que
+
+\[ 
+  \dv{C_L}{t} = -QO_2X
+\]
+
+se puede decir que 
+
+\[ 
+  QO_2X = \SI{4.49188e-6}{\g\per\L\per\s}
+\]
+
+Como $X=\SI{0.0208}{\g\per\mL}$, se tiene entonces que
+
+\begin{equation*}
+  \begin{array}{c}
+    QO_2 = \displaystyle\frac{\SI[per-mode=fraction]{4.49188e-6}{\g\per\L\per\s}}{\SI[per-mode=fraction]{0.0208}{\g\per\mL}} \cdot \left(\frac{1\text{ L}}{1000\text{ mL}}\right)\cdot\left(\frac{1\text{ mol O}_2}{32\text{ g}}\right) \cdot \left(\frac{1000\text{ mmol}}{1\text{ mol}}\right)\cdot\left(\frac{3600\text{ s}}{1\text{ 1}}\right) \\[25pt]
+    \Leftrightarrow QO_2 = 0.024295 \text{ mmol O}_2\text{ g}_{\text{biomasa}}^{-1}\text{ h}^{-1}
+  \end{array}
+\end{equation*}
 
